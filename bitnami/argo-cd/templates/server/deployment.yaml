@@ -137,6 +137,9 @@ spec:
             - /opt/bitnami/argo-cd/app
             - --repo-server
             - {{ include "argocd.repo-server" . }}:{{ .Values.repoServer.service.port }}
+            {{- if .Values.server.insecure }}
+            - --insecure
+            {{- end }}
             {{- if .Values.dex.enabled }}
             - --dex-server
             - http://{{ include "argocd.dex" . }}:{{ .Values.dex.service.ports.http }}
